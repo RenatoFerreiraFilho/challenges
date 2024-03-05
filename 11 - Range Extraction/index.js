@@ -9,44 +9,24 @@
 // solution([-10, -9, -8, -6, -3, -2, -1, 0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15, 17, 18, 19, 20]);
 // // returns "-10--8,-6,-3-1,3-5,7-11,14,15,17-20"
 function solution(list) {
-    console.log(list);
-    const teste = list.reduce(
-        (acc, n) =>
-            n - acc.prev > 1
-                ? { result: acc.result + "-" + acc.prev + ",", prev: n }
-                : { result: acc.result, prev: n },
-        {
-            result: "",
-            prev: "",
+    let resultado = "";
+    let newRange = true;
+    console.log(list[2] - list[1]);
+    for (var i = 0; i < list.length - 1; i++) {
+        if (list[i + 1] - list[i] > 1) {
+            resultado = resultado + list[i] + ",";
+            newRange = true;
+        } else if (newRange) {
+            if (list[i + 1 + 1] - list[i + 1] > 1) {
+                resultado = resultado + list[i] + ",";
+            } else {
+                resultado = resultado + list[i] + "-";
+            }
+            newRange = false;
         }
-    );
-    teste;
-
-    const res = list.reduce(
-        (acc, item) =>
-            acc.currSeq === null
-                ? {
-                      result: acc.result,
-                      currSeq: item + "-",
-                      lastInSeq: item,
-                      last: item,
-                  }
-                : acc.last === item - 1
-                ? {
-                      result: acc.result,
-                      currSeq: acc.currSeq,
-                      lastInSeq: item,
-                      last: item,
-                  }
-                : {
-                      result: acc.result + acc.currSeq + acc.last + ",",
-                      currSeq: item + "-",
-                      lastInSeq: item,
-                      last: item,
-                  },
-        { result: "", currSeq: null, lastInSeq: null, last: null }
-    );
-    console.log(res);
+    }
+    resultado = resultado + list[i];
+    return resultado;
 }
 
 console.log(
