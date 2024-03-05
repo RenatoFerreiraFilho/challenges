@@ -11,13 +11,14 @@
 function solution(list) {
     let resultado = "";
     let newRange = true;
-    console.log(list[2] - list[1]);
+    list.sort((a, b) => a - b);
+    console.log(list);
     for (var i = 0; i < list.length - 1; i++) {
         if (list[i + 1] - list[i] > 1) {
             resultado = resultado + list[i] + ",";
             newRange = true;
         } else if (newRange) {
-            if (list[i + 1 + 1] - list[i + 1] > 1) {
+            if (list[i + 1 + 1] - list[i + 1] > 1 || !list[i + 1 + 1]) {
                 resultado = resultado + list[i] + ",";
             } else {
                 resultado = resultado + list[i] + "-";
@@ -31,7 +32,7 @@ function solution(list) {
 
 console.log(
     solution([
-        -10, -9, -8, -6, -3, -2, -1, 0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15, 17,
-        18, 19, 20,
+        30, -10, -9, -8, -6, -3, -2, -1, 0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15,
+        17, 18, 19, 20,
     ])
 );
